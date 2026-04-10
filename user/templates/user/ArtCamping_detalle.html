@@ -1,0 +1,14 @@
+{% extends "user/base.html" %}
+
+{% block title %}Detalle ArtCamping - AppBaquedano{% endblock %}
+
+{% block content %}
+{# -- CODE - Parte III --- #}
+<div class="container">
+  <div class="card">
+    <h1 class="card__title">{{ object.nombre }}</h1>
+    <p class="card__body">Precio: ${{ object.precio }}</p>
+    <a class="btn" href="{% url 'ArtCamping_list' %}">Volver</a>
+  </div>
+</div>
+{% endblock %}

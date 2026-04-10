@@ -8,24 +8,36 @@
   </div>
 
   <nav class="baquedano-nav-bar">
-    <div class="container baquedano-nav-container">
+    <div class="baquedano-nav-container">
       
       <div class="baquedano-menu">
         <a class="baquedano-link" href="{% url 'inicio' %}">Inicio</a>
-        <a class="baquedano-link" href="{% url 'Toldos' %}">Toldos</a>
-        <a class="baquedano-link" href="{% url 'RopaTrabajo' %}">Ropa de Trabajo</a>
-        <a class="baquedano-link" href="{% url 'ArtCamping' %}">Articulos de Camping</a>
+        <a class="baquedano-link" href="{% url 'about' %}">Acerca de mí</a>
+        <a class="baquedano-link" href="{% url 'toldos_list' %}">Toldos</a>
+        <a class="baquedano-link" href="{% url 'ArtCamping_list' %}">Camping</a>
+        <a class="baquedano-link admin-link" href="/admin/">Admin</a>
       </div>
 
-      <div class="baquedano-user">
+      <div class="baquedano-user-area">
+        
         {% if user.is_authenticated %}
-          <span class="user-name">{{ user.username }}</span>
-          <a class="baquedano-link" href="{% url 'editar_perfil' %}">Perfil</a>
-          <a class="baquedano-link" href="{% url 'logout' %}">Salir</a>
-        {% else %}
-          <a class="baquedano-link" href="#">Login</a>
-          <a class="baquedano-link baquedano-register" href="#">Registro</a>
+          <div class="user-info">
+            {% if user.avatar_set.last %}
+              <img src="{{ user.avatar_set.last.imagen.url }}" class="nav-avatar" alt="User">
+            {% endif %}
+            <span class="user-name"><strong>{{ user.username }}</strong></span>
+          </div>
         {% endif %}
+        
+        <div class="baquedano-button-group">
+          <a class="btn-baq-sm" href="{% url 'EditarPerfil' %}">Perfil</a>
+          <a class="btn-baq-sm" href="{% url 'upload_avatar' %}">Avatar</a>
+          
+          <a class="btn-baq-sm" href="{% url 'login' %}">Ingresar</a>
+          <a class="btn-baq-outline-sm" href="{% url 'register' %}">Registro</a>
+          
+          <a class="btn-baq-danger-sm" href="{% url 'logout' %}">Salir</a>
+        </div>
       </div>
 
     </div>
@@ -33,61 +45,101 @@
 </header>
 
 <style>
-    /* 1. Estilo del Panel Rojo Superior */
+    /* 1. Panel Superior */
     .baquedano-brand-panel {
         background-color: #CC0000;
         color: white;
-        border-bottom: 8px solid #8B0000;
-        padding: 40px 0; /* Un poco menos que py-5 para que no ocupe toda la pantalla */
+        border-bottom: 5px solid #8B0000;
+        padding: 20px 0;
     }
 
-    .baquedano-brand-panel h1 {
-        font-family: 'Arial Black', sans-serif;
-        letter-spacing: 2px;
-    }
-
-    /* 2. Estilo de la Barra de Navegación Blanca */
+    /* 2. Barra de Navegación */
     .baquedano-nav-bar {
         background-color: #ffffff;
-        border-bottom: 1px solid #e0e0e0;
-        padding: 15px 0;
+        border-bottom: 2px solid #f0f0f0;
+        padding: 10px 0;
     }
 
     .baquedano-nav-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* Mantiene uno a cada lado */
+        align-items: center;
+        max-width: 1000px; /* Al achicar esto, los grupos se acercan al centro */
+        margin: 0 auto;    /* Centra todo el bloque en la pantalla */
+    }
+
+    /* 3. Agrupamiento de botones (Menos separación) */
+    .baquedano-menu {
+        display: flex;
+        gap: 25px; /* Espacio justo para links */
         align-items: center;
     }
 
-    /* 3. Botones y Separación (Aumentada) */
-    .baquedano-menu, .baquedano-user {
+    .baquedano-user-area {
         display: flex;
-        gap: 60px; /* Separación amplia como pediste antes */
+        gap: 15px; /* Espacio reducido entre nombre y botones */
+        align-items: center;
     }
 
+    .baquedano-button-group {
+        display: flex;
+        gap: 8px; /* Botones bien pegaditos */
+    }
+
+    /* 4. Estilos de Links y Botones Personalizados */
     .baquedano-link {
-        color: #333333 !important;
+        color: #333 !important;
         text-decoration: none !important;
-        font-family: sans-serif;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         text-transform: uppercase;
-        transition: all 0.3s ease;
     }
 
-    /* Efecto Hover: Solo cambia a rojo al pasar el mouse */
-    .baquedano-link:hover {
+    .baquedano-link:hover { color: #CC0000 !important; }
+
+    /* Botón estilo Baquedano Rojo */
+    .btn-baq-sm {
+        background-color: #CC0000;
+        color: white !important;
+        padding: 5px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+    .btn-baq-sm:hover { background-color: #a30000; }
+
+    /* Botón Outline */
+    .btn-baq-outline-sm {
+        border: 1px solid #CC0000;
         color: #CC0000 !important;
-        transform: translateY(-2px);
+        padding: 5px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: bold;
     }
 
-    .baquedano-register {
-        color: #CC0000 !important; /* Resaltamos el registro con el color de la marca */
-        font-weight: 800;
+    /* Botón Salir (Gris oscuro o Negro para variar) */
+    .btn-baq-danger-sm {
+        background-color: #333;
+        color: white !important;
+        padding: 5px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.85rem;
     }
 
-    .user-name {
-        color: #666666;
-        font-weight: normal;
+    /* Avatar en Nav */
+    .nav-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 8px;
+        object-fit: cover;
+        border: 1px solid #ddd;
     }
+
+    .user-name { font-size: 0.9rem; color: #555; }
 </style>

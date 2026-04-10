@@ -1,0 +1,17 @@
+{% extends "user/base.html" %}
+
+{% block title %}Login - AppBaquedano{% endblock %}
+
+{% block content %}
+{# -- CODE - Parte III --- #}
+<div class="container">
+  <div class="card">
+    <h1 class="card__title">Login</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn" type="submit">Ingresar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

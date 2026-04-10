@@ -1,0 +1,60 @@
+{% extends "user/base.html" %}
+
+{% block title %}ArtCamping - AppBaquedano{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="display-5 fw-bold" style="color: #CC0000;">Gestión de artículos de camping</h1>
+    
+    <a class="btn " href="{% url 'ArtCamping_crear' %}">+ Nuevo Artículo de Camping</a>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body p-0"> 
+      <table class="table table-hover m-0">
+        <thead class="table-dark">
+          <tr>
+            <th class="ps-4">Nombre</th>
+            <th>Precio</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ArtCampings in ArtCamping %}
+          <tr>
+            <td class="ps-4 fw-bold">{{ ArtCampings.nombre }}</td>
+            <td>${{ ArtCampings.precio }}</td>
+            <td class="text-center" style="white-space: nowrap;">
+    <a href="{% url 'ArtCamping_detalle' ArtCampings.pk %}" 
+       class="btn btn-sm" 
+       style="background-color: #28a745 !important; border-color: #28a745 !important; color: white !important;">
+       Detalle
+    </a>
+    
+    <a href="{% url 'ArtCamping_editar' ArtCampings.pk %}" 
+       class="btn btn-sm" 
+       style="background-color: #fd7e14 !important; border-color: #fd7e14 !important; color: white !important;">
+       Cambiar
+    </a>
+    
+    <a href="{% url 'ArtCamping_borrar' ArtCampings.pk %}" 
+       class="btn btn-sm" 
+       style="background-color: #dc3545 !important; border-color: #dc3545 !important; color: white !important;">
+       Eliminar
+    </a>
+</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="text-center text-muted py-4">
+              No hay Artículos de Camping cargados en el sistema.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

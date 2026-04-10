@@ -1,0 +1,20 @@
+{% extends "user/base.html" %}
+
+{% block title %}Subir Avatar{% endblock %}
+
+{% block content %}
+<section class="container">
+    <!-- clase final - 06 creacion del template upload avatar -->
+    <h2>Subir Avatar</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Subir</button>
+    </form>
+
+    {% if avatar.imagen %}
+        <h3>Avatar actual</h3>
+        <img src="{{ avatar.imagen.url }}" alt="Avatar de usuario" style="max-width: 180px; height: auto;">
+    {% endif %}
+</section>
+{% endblock %}

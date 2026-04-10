@@ -1,0 +1,14 @@
+{% extends "user/base.html" %}
+
+{% block title %}Detalle Toldo - AppBaquedano{% endblock %}
+
+{% block content %}
+{# -- CODE - Parte III --- #}
+<div class="container">
+  <div class="card">
+    <h1 class="card__title">{{ object.cliente }}</h1>
+    <p class="card__body">Tipo: {{ object.tipo_toldo }}</p>
+    <a class="btn" href="{% url 'toldos_list' %}">Volver</a>
+  </div>
+</div>
+{% endblock %}

@@ -10,7 +10,14 @@
     <link rel="stylesheet" href="{% static 'user/css/pages.css' %}" />
   </head>
   <body>
-    {% block navbar %}{% include "user/partials/_navbar.html" %}{% endblock %}
-    <main>{% block content %}{% endblock %}</main>
+    {% block navbar %}
+        {% include "user/partials/_navbar.html" %}
+    {% endblock %}
+
+    
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
   </body>
 </html>

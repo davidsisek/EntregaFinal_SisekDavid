@@ -1,0 +1,17 @@
+{% extends "user/base.html" %}
+
+{% block title %}Eliminar ArtCamping - AppCoder{% endblock %}
+
+{% block content %}
+{# -- CODE - Parte III --- #}
+<div class="container">
+  <div class="card">
+    <h1 class="card__title">Eliminar ArtCamping</h1>
+    <p class="card__body">¿Seguro que deseas borrar el artículo  {{ object.nombre }} con precio de ${{ object.precio }} ?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button class="btn" type="submit">Confirmar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

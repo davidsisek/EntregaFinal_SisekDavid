@@ -1,5 +1,6 @@
 from django.db import models
-
+# crear usuario a partir de la clase User de Django
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Toldos(models.Model):
@@ -25,3 +26,21 @@ class ArtCamping(models.Model):
 
     def __str__(self) -> str:
         return self.nombre
+    
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="avatar")
+    imagen = models.ImageField(upload_to="avatares", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.imagen}"
+    
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Agregar campos adicionales al perfil de usuario
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to="avatars/", blank=True)
+
+    def __str__(self):
+        return self.user.username

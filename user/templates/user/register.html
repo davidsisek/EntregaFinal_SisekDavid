@@ -1,0 +1,73 @@
+{% extends "user/base.html" %}
+
+{% block title %}Registro - AppBaquedano{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 mx-auto" style="max-width: 500px; border-radius: 15px;">
+    <h1 class="text-center mb-4" style="color: #CC0000; font-weight: bold;">Registro de Usuario</h1>
+
+    {# --- SECCIÓN DE ERRORES --- #}
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        <ul class="mb-0">
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <form method="post" class="form">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">{{ form.username.label_tag }}</label>
+        {{ form.username }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">{{ form.first_name.label_tag }}</label>
+        {{ form.first_name }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">{{ form.last_name.label_tag }}</label>
+        {{ form.last_name }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">{{ form.email.label_tag }}</label>
+        {{ form.email }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Contraseña</label>
+        {{ form.password1 }}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Confirmar contraseña</label>
+        {{ form.password2 }}
+      </div>
+
+      <div class="d-grid mt-4">
+        <button class="btn btn-danger btn-lg" type="submit">Crear cuenta</button>
+      </div>
+    </form>
+    
+    <div class="text-center mt-3">
+        <p>¿Ya tenés cuenta? <a href="{% url 'login' %}" style="color: #CC0000;">Iniciá sesión aquí</a></p>
+    </div>
+  </div>
+</div>
+
+{# Este script es para que los campos se vean prolijos con Bootstrap #}
+<script>
+    document.querySelectorAll('input').forEach(function(input) {
+        input.classList.add('form-control');
+    });
+</script>
+{% endblock %}
