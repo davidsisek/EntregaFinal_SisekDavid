@@ -1,8 +1,7 @@
 
 La App Baquedano describe un negocio situado en la ciudad de Pergamino, Provincia de Buenos Aires
-Este negocio se dedica a satisfacer las necesidades de 3 importanes rubros:
+Este negocio se dedica a satisfacer las necesidades importanes rubros:
     Confeccion de Toldos
-    Venta de Ropa de Trabajo
     Venta de Articulos de Camping
 
 Para este desarollo se buscó proporcionar un sistema que le permita:
